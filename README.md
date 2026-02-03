@@ -1,4 +1,4 @@
-# 🛒 E-Commerce App (Go) — LGTM Observability Ready
+<img width="762" height="695" alt="image" src="https://github.com/user-attachments/assets/06ff367a-861e-40e1-bcde-9aa6582bf30c" /># 🛒 E-Commerce App (Go) — LGTM Observability Ready
 
 Contoh aplikasi **E-Commerce Backend** berbasis **Go (monolith)** dengan frontend sederhana (HTML template)  
 yang sudah terintegrasi **Grafana LGTM Stack** (Logs, Grafana, Tempo, Mimir, Pyroscope).
@@ -49,51 +49,4 @@ ecommerce-app/
 │
 ├── go.mod
 └── Dockerfile
-
-Ownership Rule
-
-Developer
-
-handlers/
-
-repository/
-
-templates/
-
-seluruh business logic
-
-DevOps
-
-observability/
-
-Dockerfile
-
-deployment
-
-LGTM stack integration (Loki, Grafana, Tempo, Mimir, Pyroscope)
-
-Business code tidak perlu tahu tentang Tempo / Pyroscope
-Observability cukup di-inject lewat satu function call.
-
-🔌 Integrasi Observability (Single Injection Point)
-
-Integrasi observability cukup satu baris di main.go:
-
-import "ecommerce-app/observability"
-
-func main() {
-    observability.Init()
-
-    // business logic dimulai di bawah ini
-}
-
-
-Tanpa:
-
-import OpenTelemetry di handler
-
-konfigurasi tracing di business code
-
-logika profiling di aplikasi
-
-Semua ditangani oleh module observability.
+...
