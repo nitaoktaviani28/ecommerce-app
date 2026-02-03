@@ -24,23 +24,26 @@ agar mudah di-maintain, di-review, dan di-scale.
 
 ## 🧠 Arsitektur & Ownership
 
-Struktur project:
-
 ecommerce-app/
-├── main.go # business entrypoint
-├── handlers/ # HTTP handlers (business)
-│ ├── product.go
-│ └── order.go
-├── repository/ # database access (business)
-│ └── postgres.go
-├── templates/ # frontend (HTML)
-│ ├── index.html
-│ └── success.html
-├── observability/ # DEVOPS OWNED MODULE
-│ ├── init.go
-│ ├── tracing.go
-│ ├── profiling.go
-│ └── env.go
+├── main.go                # business entrypoint
+│
+├── handlers/              # HTTP handlers (business)
+│   ├── product.go
+│   └── order.go
+│
+├── repository/            # database access layer (business)
+│   └── postgres.go
+│
+├── templates/             # frontend (HTML templates)
+│   ├── index.html
+│   └── success.html
+│
+├── observability/         # DEVOPS OWNED MODULE
+│   ├── init.go            # bootstrap observability
+│   ├── tracing.go         # OpenTelemetry → Tempo
+│   ├── profiling.go       # Pyroscope profiling
+│   └── env.go             # environment helpers
+│
 ├── go.mod
 └── Dockerfile
 
