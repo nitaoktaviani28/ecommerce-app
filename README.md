@@ -10,10 +10,10 @@ agar mudah di-maintain, di-review, dan di-scale.
 
 ## ✨ Fitur Utama
 
-- Backend Go (net/http)
+- Backend Go (`net/http`)
 - Frontend HTML (server-side rendering)
 - PostgreSQL sebagai database
-- Order & product flow sederhana
+- Alur product & order sederhana
 - Observability lengkap:
   - **Tracing** → Tempo
   - **Metrics** → Mimir (Prometheus-compatible)
@@ -24,6 +24,9 @@ agar mudah di-maintain, di-review, dan di-scale.
 
 ## 🧠 Arsitektur & Ownership
 
+### Struktur Project
+
+```text
 ecommerce-app/
 ├── main.go                # business entrypoint
 │
@@ -46,25 +49,3 @@ ecommerce-app/
 │
 ├── go.mod
 └── Dockerfile
-
-### Ownership Rule
-- **Developer**: `handlers/`, `repository/`, `templates/`, business logic
-- **DevOps**: `observability/`, Dockerfile, deployment, LGTM integration
-
-> Business code **tidak perlu tahu** tentang Tempo / Pyroscope  
-> Observability cukup di-*inject* lewat satu function call.
-
----
-
-## 🔌 Cara Integrasi Observability (Paling Penting)
-
-Di `main.go`, integrasi observability **cukup satu baris**:
-
-```go
-import "ecommerce-app/observability"
-
-func main() {
-    observability.Init()
-
-    // business code di bawah ini
-}
