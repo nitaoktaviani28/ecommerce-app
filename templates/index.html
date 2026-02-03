@@ -1,232 +1,34 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛒 E-Commerce Store</title>
+    <title>E-Commerce Store</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .products {
-            padding: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .product {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .product:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border-color: #3498db;
-        }
-        
-        .product h3 {
-            color: #2c3e50;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .product h3::before {
-            content: "💻";
-            margin-right: 10px;
-            font-size: 1.2em;
-        }
-        
-        .price {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-        
-        .order-form {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .quantity-input {
-            width: 80px;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: center;
-        }
-        
-        .quantity-input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        
-        .buy-btn {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .buy-btn:hover {
-            background: linear-gradient(135deg, #229954, #27ae60);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-        }
-        
-        .buy-btn:active {
-            transform: translateY(0);
-        }
-        
-        .footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-        }
-        
-        @media (max-width: 768px) {
-            .products {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .order-form {
-                justify-content: center;
-            }
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; margin-bottom: 30px; }
+        .product { border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px; background: #fafafa; }
+        .price { color: #e74c3c; font-weight: bold; font-size: 1.2em; margin: 10px 0; }
+        button { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #2980b9; }
+        input[type=number] { width: 60px; padding: 8px; margin: 0 10px; border: 1px solid #ddd; border-radius: 4px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🛒 E-Commerce Store</h1>
-            <p>Pilih produk gaming terbaik untuk kebutuhan Anda!</p>
+        <h1>🛒 E-Commerce Store</h1>
+        {{range .}}
+        <div class="product">
+            <h3>{{.Name}}</h3>
+            <div class="price">Rp {{printf "%.0f" .Price}}</div>
+            <form action="/checkout" method="POST" style="display:inline">
+                <input type="hidden" name="product_id" value="{{.ID}}">
+                <input type="number" name="quantity" value="1" min="1" max="10">
+                <button type="submit">Buy Now</button>
+            </form>
         </div>
-        
-        <div class="products">
-            {{range .}}
-            <div class="product">
-                <h3>{{.Name}}</h3>
-                <div class="price">Rp {{printf "%.0f" .Price}}</div>
-                <form class="order-form" action="/checkout" method="POST" onsubmit="showLoading(this)">
-                    <input type="hidden" name="product_id" value="{{.ID}}">
-                    <input type="number" name="quantity" value="1" min="1" max="10" class="quantity-input" required>
-                    <button type="submit" class="buy-btn">🛒 Beli Sekarang</button>
-                </form>
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Memproses pesanan...</p>
-                </div>
-            </div>
-            {{end}}
-        </div>
-        
-        <div class="footer">
-            <p>© 2024 E-Commerce Store - Contoh Aplikasi Monolith Go dengan Observability Lengkap</p>
-        </div>
+        {{end}}
     </div>
-
-    <script>
-        function showLoading(form) {
-            const product = form.closest('.product');
-            const loading = product.querySelector('.loading');
-            const orderForm = product.querySelector('.order-form');
-            
-            orderForm.style.display = 'none';
-            loading.style.display = 'block';
-        }
-        
-        // Format harga dengan pemisah ribuan
-        document.addEventListener('DOMContentLoaded', function() {
-            const prices = document.querySelectorAll('.price');
-            prices.forEach(price => {
-                const text = price.textContent;
-                const number = text.replace(/[^\d]/g, '');
-                const formatted = new Intl.NumberFormat('id-ID').format(number);
-                price.textContent = 'Rp ' + formatted;
-            });
-        });
-    </script>
 </body>
 </html>
