@@ -49,3 +49,51 @@ ecommerce-app/
 │
 ├── go.mod
 └── Dockerfile
+
+Ownership Rule
+
+Developer
+
+handlers/
+
+repository/
+
+templates/
+
+seluruh business logic
+
+DevOps
+
+observability/
+
+Dockerfile
+
+deployment
+
+LGTM stack integration (Loki, Grafana, Tempo, Mimir, Pyroscope)
+
+Business code tidak perlu tahu tentang Tempo / Pyroscope
+Observability cukup di-inject lewat satu function call.
+
+🔌 Integrasi Observability (Single Injection Point)
+
+Integrasi observability cukup satu baris di main.go:
+
+import "ecommerce-app/observability"
+
+func main() {
+    observability.Init()
+
+    // business logic dimulai di bawah ini
+}
+
+
+Tanpa:
+
+import OpenTelemetry di handler
+
+konfigurasi tracing di business code
+
+logika profiling di aplikasi
+
+Semua ditangani oleh module observability.
