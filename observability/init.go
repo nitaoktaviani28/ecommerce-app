@@ -4,23 +4,33 @@ import (
 	"log"
 )
 
-// Init initializes all observability components
-// This is the ONLY function that business logic calls
+// Init berfungsi untuk menginisialisasi seluruh komponen observability.
+// Fungsi ini menjadi satu-satunya titik masuk (single entry point)
+// yang dipanggil oleh aplikasi utama untuk mengaktifkan tracing,
+// profiling, dan metrics.
+// Pendekatan ini memastikan logika bisnis tidak bergantung langsung
+// pada detail implementasi observability.
 func Init() {
-	log.Println("🔍 Initializing observability...")
+	log.Println("Initializing observability...")
 
-	// Initialize tracing
+	// Menginisialisasi komponen tracing (OpenTelemetry / Tempo)
+	// Jika inisialisasi gagal, aplikasi tetap berjalan
+	// tanpa menghentikan proses utama.
 	if err := initTracing(); err != nil {
 		log.Printf("Tracing init failed: %v", err)
 	}
 
-	// Initialize profiling
+	// Menginisialisasi komponen profiling (Grafana Pyroscope)
+	// Profiling bersifat opsional dan tidak mempengaruhi
+	// fungsionalitas utama aplikasi.
 	if err := initProfiling(); err != nil {
 		log.Printf("Profiling init failed: %v", err)
 	}
 
-	// Initialize metrics
+	// Menginisialisasi metrics aplikasi.
+	// Pada implementasi saat ini, sebagian besar metrics
+	// didaftarkan langsung pada layer handler.
 	initMetrics()
 
-	log.Println("✅ Observability initialized")
+	log.Println("Observability initialized")
 }
