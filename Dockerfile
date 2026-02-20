@@ -23,3 +23,4 @@ ENV DATABASE_DSN=postgres://user:pass@postgres:5432/shop?sslmode=disable
 
 EXPOSE 8080
 CMD ["./main"]
+
