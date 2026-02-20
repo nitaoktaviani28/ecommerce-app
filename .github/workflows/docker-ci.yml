@@ -1,5 +1,8 @@
 name: Docker CI (Multi-Arch)
 
+env:
+  IMAGE_NAME: myapp-go
+
 on:
   push:
     branches:
