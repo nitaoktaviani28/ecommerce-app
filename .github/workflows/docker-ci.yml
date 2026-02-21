@@ -14,6 +14,10 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    # 👇 INI KUNCI APPROVAL
+    environment:
+      name: production
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
